@@ -10,6 +10,7 @@ import com.httpdemo.zhulonglong.koitindemo.R
 import com.httpdemo.zhulonglong.koitindemo.adapter.StoreListAdapter
 import com.httpdemo.zhulonglong.koitindemo.domain.store.Response
 import com.httpdemo.zhulonglong.koitindemo.domain.store.Store
+import com.httpdemo.zhulonglong.koitindemo.net.ResultSub
 import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.net.StoreApi
 import kotlinx.android.synthetic.main.fragment_store_gate.*
@@ -41,19 +42,27 @@ class StoreGateFragment():Fragment(){
         return inflater.inflate(R.layout.fragment_store_gate,container!!,false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         store_list.layoutManager = LinearLayoutManager(context)
         RetrifitService()
                 .create(StoreApi::class.java)
                 .requestStoreAndroid(type,20,1)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({
-                    if (!it.error){
-                        Timber.i("size is ${it.results.size}")
-                        store_list.adapter = StoreListAdapter(it.results){toast("On click ${it.desc}")}
-                    }
-                },{it.printStackTrace()})
+                // 使用同一管理 ResultSub
+                .subscribe(ResultSub<Store>{
+                    store_list.adapter = StoreListAdapter(it){toast("On click ${it.desc}")}
+                })
+
+                // 直接使用匿名
+//                .subscribe ({
+//                    if (!it.error){
+//                        Timber.i("size is ${it.results.size}")
+//                        store_list.adapter = StoreListAdapter(it.results){toast("On click ${it.desc}")}
+//                    }
+//                },{it.printStackTrace()})
     }
 
     /**
