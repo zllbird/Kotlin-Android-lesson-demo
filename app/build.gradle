@@ -31,6 +31,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.7'
@@ -44,8 +45,11 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.4.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
+    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+//    http://maven.aliyun.com/nexus/content/groups/public/org/jetbrains/anko/anko-support-v4/0.9/?spm=0.0.0.0.HIH9Go/
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
 }
 
 repositories {

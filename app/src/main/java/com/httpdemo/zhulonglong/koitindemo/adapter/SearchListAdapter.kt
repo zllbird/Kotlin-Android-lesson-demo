@@ -15,24 +15,25 @@ import org.jetbrains.anko.*
  * search result
  * Created by zhulonglong on 2017/1/8.
  */
-class SearchListAdapter(val items:List<SearchRepoItem>): RecyclerView.Adapter<SearchListAdapter.ViewHolder>(){
+class SearchListAdapter(val items:List<SearchRepoItem>,val onItemClick:(SearchRepoItem) -> Unit): RecyclerView.Adapter<SearchListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_search_repo,parent,false)
-        return ViewHolder(view)
+        return ViewHolder(view,onItemClick)
     }
 
     override fun getItemCount(): Int = items.count()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindViewBySearchRepoItem(items[position])
+        holder.bindViewBySearchRepoItem(items[position],onItemClick)
     }
 
-    class ViewHolder(val view: View):RecyclerView.ViewHolder(view){
-        fun bindViewBySearchRepoItem(searchRepoItem: SearchRepoItem) = with(searchRepoItem){
+    class ViewHolder(val view: View,val onItemClick: (SearchRepoItem) -> Unit):RecyclerView.ViewHolder(view){
+        fun bindViewBySearchRepoItem(searchRepoItem: SearchRepoItem, onItemClick: (SearchRepoItem) -> Unit) = with(searchRepoItem){
             view.repo_name.text = name
             view.repo_desc.text = description
             view.repo_stars.text = stargazers_count.toString()
+            view.setOnClickListener { onItemClick(searchRepoItem) }
         }
     }
 }
