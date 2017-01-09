@@ -17,5 +17,5 @@ class StorePagerAdapter(val fragments:List<StoreGateFragment>,fm: FragmentManage
 
     override fun getCount(): Int = fragments.size
 
-    override fun getPageTitle(position: Int): CharSequence = "Android"
+    override fun getPageTitle(position: Int): CharSequence = fragments[position].arguments.getString(StoreGateFragment.TITLE)
 }

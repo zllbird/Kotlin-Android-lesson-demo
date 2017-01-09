@@ -32,6 +32,7 @@ class GithubApiTestActivity : AppCompatActivity() {
         forecast_list.layoutManager = LinearLayoutManager(this)
         Timber.tag(javaClass.simpleName)
         quest()
+
     }
 
     fun quest(){

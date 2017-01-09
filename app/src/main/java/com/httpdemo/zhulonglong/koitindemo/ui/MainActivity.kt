@@ -28,18 +28,28 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Timber.tag("kotlin")
         toast("hello")
         initViewPager()
+
     }
 
     private fun initViewPager() {
+
+//        福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
+        val types:List<String> = listOf(
+                "all","Android","iOS","前端","拓展资源","福利","休息视频"
+        )
+
         val list :ArrayList<StoreGateFragment> = ArrayList()
         for (index in 0..5){
-            val item :StoreGateFragment = StoreGateFragment()
+            val item :StoreGateFragment = StoreGateFragment().apply {
+                arguments = Bundle().apply { putString(StoreGateFragment.TITLE ,types[index]) }
+            }
             list.add(item)
         }
         Timber.i("list ${list.size}")

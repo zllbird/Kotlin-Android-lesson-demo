@@ -8,15 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.httpdemo.zhulonglong.koitindemo.R
 import com.httpdemo.zhulonglong.koitindemo.adapter.StoreListAdapter
+import com.httpdemo.zhulonglong.koitindemo.domain.store.Response
+import com.httpdemo.zhulonglong.koitindemo.domain.store.Store
 import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.net.StoreApi
 import kotlinx.android.synthetic.main.fragment_store_gate.*
 import org.jetbrains.anko.support.v4.*
-import retrofit2.Retrofit
+import retrofit2.Call
+import retrofit2.Callback
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-import org.jetbrains.anko.toast
 import timber.log.Timber
 
 /**
@@ -28,8 +30,11 @@ class StoreGateFragment():Fragment(){
         val TITLE:String = "StoreGateFragment:title"
     }
 
+    var type:String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        type = arguments.getString(TITLE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,12 +43,9 @@ class StoreGateFragment():Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         store_list.layoutManager = LinearLayoutManager(context)
-//        store_list.adapter =
-//        store_list.adapter =
         RetrifitService()
-                .retrofit
                 .create(StoreApi::class.java)
-                .requestStoreAndroid(10,1)
+                .requestStoreAndroid(type,20,1)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
@@ -52,6 +54,27 @@ class StoreGateFragment():Fragment(){
                         store_list.adapter = StoreListAdapter(it.results){toast("On click ${it.desc}")}
                     }
                 },{it.printStackTrace()})
+    }
+
+    /**
+     * 直接使用Retrofit
+     */
+    @Deprecated("过期") fun requestData(){
+        val call = RetrifitService().create(StoreApi::class.java).requestStoreAndroidCall(10, 1)
+        call.execute() // 同步
+        // 异步
+        call.enqueue(object :Callback<Response<Store>>{
+            override fun onResponse(call: Call<Response<Store>>?, response: retrofit2.Response<Response<Store>>?) {
+                toast("onResponse")
+                UI {  }
+            }
+
+            override fun onFailure(call: Call<Response<Store>>?, t: Throwable?) {
+                toast("onFailure")
+            }
+        })
+
+
     }
 
 }
