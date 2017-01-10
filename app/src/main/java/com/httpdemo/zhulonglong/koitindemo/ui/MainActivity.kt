@@ -57,4 +57,6 @@ class MainActivity : AppCompatActivity() {
         tab_layout.setupWithViewPager(content_view_pager)
     }
 
+
+
 }

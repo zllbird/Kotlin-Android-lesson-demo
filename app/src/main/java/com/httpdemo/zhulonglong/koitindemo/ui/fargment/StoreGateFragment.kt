@@ -13,6 +13,7 @@ import com.httpdemo.zhulonglong.koitindemo.domain.store.Store
 import com.httpdemo.zhulonglong.koitindemo.net.ResultSub
 import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.net.StoreApi
+import com.httpdemo.zhulonglong.koitindemo.ui.StoreDetailActivity
 import kotlinx.android.synthetic.main.fragment_store_gate.*
 import org.jetbrains.anko.support.v4.*
 import retrofit2.Call
@@ -53,7 +54,10 @@ class StoreGateFragment():Fragment(){
                 .observeOn(AndroidSchedulers.mainThread())
                 // 使用同一管理 ResultSub
                 .subscribe(ResultSub<Store>{
-                    store_list.adapter = StoreListAdapter(it){toast("On click ${it.desc}")}
+                    store_list.adapter = StoreListAdapter(it){
+                        toast("On click ${it.desc}")
+                        startActivity<StoreDetailActivity>(StoreDetailActivity.URL to it.url)
+                    }
                 })
 
                 // 直接使用匿名
