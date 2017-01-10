@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             }
             list.add(item)
         }
-        Timber.i("list ${list.size}")
         content_view_pager.adapter = StorePagerAdapter(list,supportFragmentManager)
         tab_layout.setupWithViewPager(content_view_pager)
     }

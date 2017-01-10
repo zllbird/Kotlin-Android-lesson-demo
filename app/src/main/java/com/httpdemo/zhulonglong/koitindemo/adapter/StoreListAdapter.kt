@@ -22,7 +22,6 @@ class StoreListAdapter(val stores:List<Store>,val onItemClick: (Store) -> Unit):
     override fun getItemCount():Int = stores.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Timber.i("onBindViewHolder  $position")
         holder.bindViewByStore(stores[position])
     }
 
