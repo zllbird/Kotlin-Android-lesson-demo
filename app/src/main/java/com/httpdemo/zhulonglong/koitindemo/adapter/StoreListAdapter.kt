@@ -25,6 +25,10 @@ class StoreListAdapter(val stores:List<Store>,val onItemClick: (Store) -> Unit):
         holder.bindViewByStore(stores[position])
     }
 
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int, payloads: MutableList<Any>?) {
+        super.onBindViewHolder(holder, position, payloads)
+    }
+
     class ViewHolder(val view: View,val onItemClick: (Store) -> Unit):RecyclerView.ViewHolder(view){
         fun bindViewByStore(store:Store) = with(store){
             view.store_id.text = _id

@@ -14,7 +14,7 @@ import com.httpdemo.zhulonglong.koitindemo.net.ResultSub
 import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.net.StoreApi
 import com.httpdemo.zhulonglong.koitindemo.ui.StoreDetailActivity
-import kotlinx.android.synthetic.main.fragment_store_gate.*
+import kotlinx.android.synthetic.main.fragment_list.*
 import org.jetbrains.anko.support.v4.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,13 +40,13 @@ class StoreGateFragment():Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_store_gate,container!!,false)
+        return inflater.inflate(R.layout.fragment_list,container!!,false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        store_list.layoutManager = LinearLayoutManager(context)
+        list.layoutManager = LinearLayoutManager(context)
         RetrifitService()
                 .create(StoreApi::class.java)
                 .requestStoreAndroid(type,20,1)
@@ -54,7 +54,7 @@ class StoreGateFragment():Fragment(){
                 .observeOn(AndroidSchedulers.mainThread())
                 // 使用同一管理 ResultSub
                 .subscribe(ResultSub<Store>{
-                    store_list.adapter = StoreListAdapter(it){
+                    list.adapter = StoreListAdapter(it){
                         toast("On click ${it.desc}")
                         startActivity<StoreDetailActivity>(StoreDetailActivity.URL to it.url)
                     }
@@ -79,7 +79,6 @@ class StoreGateFragment():Fragment(){
         call.enqueue(object :Callback<Response<Store>>{
             override fun onResponse(call: Call<Response<Store>>?, response: retrofit2.Response<Response<Store>>?) {
                 toast("onResponse")
-                UI {  }
             }
 
             override fun onFailure(call: Call<Response<Store>>?, t: Throwable?) {

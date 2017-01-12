@@ -3,6 +3,7 @@ package com.httpdemo.zhulonglong.koitindemo.ui
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.httpdemo.zhulonglong.koitindemo.adapter.ForecastListAdapter
@@ -14,6 +15,7 @@ import com.httpdemo.zhulonglong.koitindemo.domain.user.SearchRepoItem
 import com.httpdemo.zhulonglong.koitindemo.net.GitHubAPI
 import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.ui.fargment.StoreGateFragment
+import kotlinx.android.synthetic.main.activity_github_test.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
@@ -27,7 +29,6 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
