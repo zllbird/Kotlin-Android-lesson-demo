@@ -1,5 +1,7 @@
 package com.httpdemo.zhulonglong.koitindemo.ui.fargment
 
+import android.accessibilityservice.GestureDescription
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +17,8 @@ import com.httpdemo.zhulonglong.koitindemo.net.RetrifitService
 import com.httpdemo.zhulonglong.koitindemo.net.StoreApi
 import com.httpdemo.zhulonglong.koitindemo.ui.StoreDetailActivity
 import kotlinx.android.synthetic.main.fragment_list.*
+import org.jetbrains.anko.AlertDialogBuilder
+import org.jetbrains.anko.async
 import org.jetbrains.anko.support.v4.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,7 +46,6 @@ class StoreGateFragment():Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list,container!!,false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -85,8 +88,12 @@ class StoreGateFragment():Fragment(){
                 toast("onFailure")
             }
         })
-
-
     }
+
+    fun test(name:String) :String {
+
+        return "";
+    }
+
 
 }

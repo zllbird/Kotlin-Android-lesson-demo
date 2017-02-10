@@ -22,6 +22,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import org.jetbrains.anko.*
+import org.jetbrains.anko.support.v4.startActivity
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import timber.log.Timber
@@ -55,6 +56,18 @@ class MainActivity : AppCompatActivity() {
         }
         content_view_pager.adapter = StorePagerAdapter(list,supportFragmentManager)
         tab_layout.setupWithViewPager(content_view_pager)
+
+//        var map = Bundle();
+//        map.putByte()
+
+        tv_player.setOnClickListener {
+            startActivity<PlayerActivity>()
+        }
+
+    }
+
+    public fun toPlayer(){
+
     }
 
 

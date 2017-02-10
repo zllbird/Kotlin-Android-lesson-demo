@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -20,6 +22,14 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
+
+//        ArrayList<String> stringArrayList = new ArrayList<>();
+//        ArrayList<Object> objects = new ArrayList<>();
+//        ArrayList<? extends Object> objects = new ArrayList<>();
+
+//        objects = stringArrayList;
+//        objects.addAll(stringArrayList);
+//        stringArrayList.addAll(objects);
 
         assertEquals("com.httpdemo.zhulonglong.koitindemo", appContext.getPackageName());
     }

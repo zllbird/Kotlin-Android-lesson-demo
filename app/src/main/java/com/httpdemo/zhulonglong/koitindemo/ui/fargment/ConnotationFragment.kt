@@ -34,15 +34,18 @@ class ConnotationFragment():Fragment(){
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list.layoutManager = LinearLayoutManager(context)
-        val items: List<Any> = ArrayList()
-        val adapter: MultiTypeAdapter = MultiTypeAdapter(items)
+        val items = ArrayList<Any>()
+        val adapter = MultiTypeAdapter(items)
 
         with(adapter){
-            setFlatTypeAdapter(object:FlatTypeClassAdapter(){
-                override fun onFlattenClass(item: Any): Class<*> {
-                    return (item as Conotation).typeClass
-                }
-            })
+//            setFlatTypeAdapter(object:FlatTypeClassAdapter(){
+//                override fun onFlattenClass(item: Any): Class<*> {
+//                    return (item as Conotation).typeClass
+//                }
+//            })
+//
+//            应该变成这样子才好看
+//            setFlatTypeAdapter{(item: Any) -> (item as Conotation).typeClass}
 
             register(ConotationText::class.java,ConnotationTextProvider())
             register(ConotationImage::class.java,ConotationImageProvider())
@@ -51,7 +54,5 @@ class ConnotationFragment():Fragment(){
         list.adapter = adapter
 
     }
-
-
 
 }
